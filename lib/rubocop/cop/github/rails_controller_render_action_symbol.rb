@@ -5,6 +5,13 @@ require "rubocop"
 module RuboCop
   module Cop
     module GitHub
+      # Using a string makes the code more consistent, so that developers
+      # who want to know which controller actions render a template
+      # can reliably search for usages of that template.
+      #
+      # Although string and symbol usage is very similar,
+      # strings work a bit better when a controller renders
+      # a template from a non-default directory (eg `render "things/show"`)
       class RailsControllerRenderActionSymbol < Cop
         MSG = "Prefer `render` with string instead of symbol"
 

@@ -52,4 +52,40 @@ class TestRailsControllerRenderActionSymbol < CopTest
     assert_equal expected_message, cop.offenses[1].message
     assert_equal expected_message, cop.offenses[2].message
   end
+
+  def test_autocorrect
+    expected_source = <<-RUBY
+      class FooController < ActionController::Base
+        def show
+          render "show"
+        end
+
+        def edit
+          render template: "edit"
+        end
+
+        def update
+          render action: "edit"
+        end
+      end
+    RUBY
+
+    corrected_source = autocorrect_source <<-RUBY
+      class FooController < ActionController::Base
+        def show
+          render :show
+        end
+
+        def edit
+          render template: :edit
+        end
+
+        def update
+          render action: :edit
+        end
+      end
+    RUBY
+
+    assert_equal expected_source, corrected_source
+  end
 end
