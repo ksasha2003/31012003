@@ -5,6 +5,16 @@ require "rubocop"
 module RuboCop
   module Cop
     module GitHub
+      # When `render` calls use a string to reference their template,
+      # we can use the string to lookup the corresponding template in the project.
+      # That way, we can make sure that such a template _actually_ exists!
+      # If the file doesn't exist, this cop will add an error.
+      #
+      # This cop accepts a configuration option, `ViewPath`, which
+      # is the directory to check for views. For example:
+      #
+      #     ViewPath: "app/views"
+      #
       class RailsControllerRenderPathsExist < Cop
         def_node_matcher :render?, <<-PATTERN
           (send nil? :render $...)

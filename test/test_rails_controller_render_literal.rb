@@ -212,7 +212,7 @@ class TestRailsControllerRenderLiteral < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "render must be used with a string literal", cop.offenses[0].message
+    assert_equal "Call `render` with a string literal to support human and automated code intelligence", cop.offenses[0].message
   end
 
   def test_render_implicit_with_layout_offense
@@ -225,7 +225,7 @@ class TestRailsControllerRenderLiteral < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "render must be used with a string literal", cop.offenses[0].message
+    assert_equal "Call `render` with a string literal to support human and automated code intelligence", cop.offenses[0].message
   end
 
   def test_render_implicit_with_status_offense
@@ -238,7 +238,7 @@ class TestRailsControllerRenderLiteral < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "render must be used with a string literal", cop.offenses[0].message
+    assert_equal "Call `render` with a string literal to support human and automated code intelligence", cop.offenses[0].message
   end
 
   def test_render_variable_offense
@@ -251,7 +251,7 @@ class TestRailsControllerRenderLiteral < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "render must be used with a string literal", cop.offenses[0].message
+    assert_equal "Call `render` with a string literal to support human and automated code intelligence", cop.offenses[0].message
   end
 
   def test_render_action_variable_offense
@@ -264,7 +264,7 @@ class TestRailsControllerRenderLiteral < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "render must be used with a string literal", cop.offenses[0].message
+    assert_equal "Call `render` with a string literal to support human and automated code intelligence", cop.offenses[0].message
   end
 
   def test_render_template_variable_offense
@@ -277,7 +277,7 @@ class TestRailsControllerRenderLiteral < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "render must be used with a string literal", cop.offenses[0].message
+    assert_equal "Call `render` with a string literal to support human and automated code intelligence", cop.offenses[0].message
   end
 
   def test_render_partial_variable_offense
@@ -290,7 +290,7 @@ class TestRailsControllerRenderLiteral < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "render must be used with a string literal", cop.offenses[0].message
+    assert_equal "Call `render` with a string literal to support human and automated code intelligence", cop.offenses[0].message
   end
 
   def test_render_template_with_layout_variable_offense
@@ -303,7 +303,7 @@ class TestRailsControllerRenderLiteral < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "render must be used with a string literal", cop.offenses[0].message
+    assert_equal "Call `render` with a string literal to support human and automated code intelligence", cop.offenses[0].message
   end
 
   def test_render_template_variable_with_layout_offense
@@ -316,6 +316,6 @@ class TestRailsControllerRenderLiteral < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "render must be used with a string literal", cop.offenses[0].message
+    assert_equal "Call `render` with a string literal to support human and automated code intelligence", cop.offenses[0].message
   end
 end

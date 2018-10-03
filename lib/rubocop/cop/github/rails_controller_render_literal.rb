@@ -5,8 +5,18 @@ require "rubocop"
 module RuboCop
   module Cop
     module GitHub
+      # When used wtih `RailsControllerRenderPathsExist`, using
+      # string literals allows us to assert that the target templates
+      # actually exist.
+      #
+      # Also, strings make it easier for humans to trace
+      # which controllers render which templates.
+      #
+      # As a bonus, strings support template inlining, so templates
+      # can be prepared efficiently at boot instead of prepared
+      # ad-hoc on the first request that loads them.
       class RailsControllerRenderLiteral < Cop
-        MSG = "render must be used with a string literal"
+        MSG = "Call `render` with a string literal to support human and automated code intelligence"
 
         def_node_matcher :literal?, <<-PATTERN
           ({str sym true false nil?} ...)
@@ -64,6 +74,7 @@ module RuboCop
           return unless render?(node)
 
           if render_literal?(node)
+            # Pass, this is acceptable
           elsif option_pairs = render_with_options?(node)
             option_pairs = option_pairs.reject { |pair| options_key?(pair) }
 

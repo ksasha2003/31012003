@@ -5,6 +5,9 @@ require "rubocop"
 module RuboCop
   module Cop
     module GitHub
+      # Instead of passing the template name with a keyword `action:` or `template:`,
+      # pass it directly to `render`. By standardizing on this form, it will be
+      # easier to hunt down which actions render which templates.
       class RailsControllerRenderShorthand < Cop
         MSG = "Prefer `render` template shorthand"
 

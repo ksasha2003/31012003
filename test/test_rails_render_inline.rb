@@ -35,7 +35,9 @@ class TestRailsRenderInline < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "Avoid `render inline:`", cop.offenses[0].message
+    assert_equal "Instead of `render inline:`, which can have memory leaks,
+use `render plain: \"...\"` for plain text, or extract a template for ERB.
+", cop.offenses[0].message
   end
 
   def test_render_status_with_inline_offense
@@ -48,8 +50,9 @@ class TestRailsRenderInline < CopTest
     RUBY
 
     assert_equal 1, cop.offenses.count
-    assert_equal "Avoid `render inline:`", cop.offenses[0].message
-  end
+    assert_equal "Instead of `render inline:`, which can have memory leaks,
+use `render plain: \"...\"` for plain text, or extract a template for ERB.
+", cop.offenses[0].message  end
 
   def test_erb_render_inline_offense
     erb_investigate cop, <<-ERB, "app/views/products/index.html.erb"
@@ -57,6 +60,8 @@ class TestRailsRenderInline < CopTest
     ERB
 
     assert_equal 1, cop.offenses.count
-    assert_equal "Avoid `render inline:`", cop.offenses[0].message
+    assert_equal "Instead of `render inline:`, which can have memory leaks,
+use `render plain: \"...\"` for plain text, or extract a template for ERB.
+", cop.offenses[0].message
   end
 end

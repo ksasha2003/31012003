@@ -5,8 +5,19 @@ require "rubocop"
 module RuboCop
   module Cop
     module GitHub
+      # The string passed to `render inline:` is compiled by ERB each time the method is called.
+      #
+      # This can lead to a memory leak: https://github.com/rails/rails/issues/33019#issuecomment-409379676
+      #
+      # To avoid a memory leak, either:
+      #
+      # - use `render plain: ...` to render plain text (no ERB); OR
+      # - extract the ERB into a template file and render that template.
       class RailsRenderInline < Cop
-        MSG = "Avoid `render inline:`"
+        MSG = <<~MSG
+Instead of `render inline:`, which can have memory leaks,
+use `render plain: "..."` for plain text, or extract a template for ERB.
+MSG
 
         def_node_matcher :render_with_options?, <<-PATTERN
           (send nil? :render (hash $...))

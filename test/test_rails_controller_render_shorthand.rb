@@ -82,4 +82,48 @@ class TestRailsControllerRenderShorthand < CopTest
     assert_equal "Use `render \"books/show\", locals: { book: @book }` instead", cop.offenses[1].message
     assert_equal "Use `render \"books/edit.html.erb\", status: :ok, layout: \"application\"` instead", cop.offenses[2].message
   end
+
+  def test_autocorrect
+    expected_source = <<-RUBY
+      class FooController < ActionController::Base
+        def show
+          render :show
+        end
+
+        def edit
+          render "edit"
+        end
+
+        def update
+          render "edit"
+        end
+
+        def partial_is_ok
+          render partial: "partial"
+        end
+      end
+    RUBY
+
+    corrected_source = autocorrect_source <<-RUBY
+      class FooController < ActionController::Base
+        def show
+          render :show
+        end
+
+        def edit
+          render template: "edit"
+        end
+
+        def update
+          render action: "edit"
+        end
+
+        def partial_is_ok
+          render partial: "partial"
+        end
+      end
+    RUBY
+
+    assert_equal expected_source, corrected_source
+  end
 end
